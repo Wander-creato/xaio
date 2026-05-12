@@ -3,14 +3,26 @@
 
 from __future__ import annotations
 
+import os
 import queue
 import sys
 import time
 from pathlib import Path
 
-import numpy as np
-import pygame
-import sounddevice as sd
+os.environ.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
+
+try:
+    import numpy as np
+    import pygame
+    import sounddevice as sd
+except ModuleNotFoundError as exc:
+    print(
+        f"Dependance manquante: {exc.name}\n"
+        "Installez les dependances avec:\n"
+        "  python -m pip install sounddevice numpy pygame",
+        file=sys.stderr,
+    )
+    raise SystemExit(1) from exc
 
 
 # ---------------------------------------------------------------------------
